@@ -9,27 +9,43 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    private lazy var button: UIButton = {
-        let b = UIButton()
-        b.translatesAutoresizingMaskIntoConstraints = false
-        b.setTitle("button", for: .normal)
-        b.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        b.backgroundColor = .green
-        return b
-    }()
+    let signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
+    let loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(button)
-        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+   
+        configureButtons()
     }
-
-    @objc func buttonTapped() {
+    
+    func configureButtons() {
+        view.addSubview(signupButton)
+        view.addSubview(loginButton)
+        
+        NSLayoutConstraint.activate([
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            loginButton.widthAnchor.constraint(equalToConstant: 250),
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signupButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            signupButton.widthAnchor.constraint(equalToConstant: 250),
+            signupButton.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        
+        loginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside) //addTarget has to be implemented into ActionButton, so the selector can be passed
+        signupButton.addTarget(self, action: #selector(signupHandler), for: .touchUpInside)
+    }
+    
+    @objc func signupHandler() {
+        let vc = SignupViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func loginHandler() {
         let vc = LoginViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-
 }
-
