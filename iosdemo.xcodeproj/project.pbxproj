@@ -10,6 +10,15 @@
 		722A3DCF2BE02732007F0BC4 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */; };
 		722A3DD12BE02E91007F0BC4 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */; };
 		722A3DD32BE03505007F0BC4 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DD22BE03505007F0BC4 /* ActionButton.swift */; };
+		72BA290F2BE0D2CE00E2363F /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA290E2BE0D2CE00E2363F /* Endpoints.swift */; };
+		72BA29112BE0D2F400E2363F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA29102BE0D2F400E2363F /* Constants.swift */; };
+		72BA29132BE0D48B00E2363F /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA29122BE0D48B00E2363F /* HTTP.swift */; };
+		72BA29162BE0D7A800E2363F /* SignupUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA29152BE0D7A800E2363F /* SignupUserRequest.swift */; };
+		72BA29182BE0D96100E2363F /* ServerResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA29172BE0D96100E2363F /* ServerResponses.swift */; };
+		72BA291A2BE0DAE900E2363F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BA29192BE0DAE900E2363F /* AuthService.swift */; };
+		72BE69612BE137180001E5DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE69602BE137180001E5DC /* SettingsViewController.swift */; };
+		72BE69632BE137AF0001E5DC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE69622BE137AF0001E5DC /* TabBarViewController.swift */; };
+		72F142BA2BE0F7D600BB7F95 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F142B92BE0F7D600BB7F95 /* MainViewController.swift */; };
 		72FBDE7A2BDD4E8E009EEFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBDE792BDD4E8E009EEFC9 /* AppDelegate.swift */; };
 		72FBDE7E2BDD4E8E009EEFC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */; };
 		72FBDE832BDD4E8F009EEFC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FBDE822BDD4E8F009EEFC9 /* Assets.xcassets */; };
@@ -22,6 +31,15 @@
 		722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
 		722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		722A3DD22BE03505007F0BC4 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		72BA290E2BE0D2CE00E2363F /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		72BA29102BE0D2F400E2363F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		72BA29122BE0D48B00E2363F /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
+		72BA29152BE0D7A800E2363F /* SignupUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUserRequest.swift; sourceTree = "<group>"; };
+		72BA29172BE0D96100E2363F /* ServerResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerResponses.swift; sourceTree = "<group>"; };
+		72BA29192BE0DAE900E2363F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		72BE69602BE137180001E5DC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		72BE69622BE137AF0001E5DC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		72F142B92BE0F7D600BB7F95 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		72FBDE762BDD4E8E009EEFC9 /* iosdemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosdemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FBDE792BDD4E8E009EEFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +61,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72BA290B2BE0D28900E2363F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */,
+				72FBDE8F2BDD53D6009EEFC9 /* SignupViewController.swift */,
+				72FBDE8D2BDD53C9009EEFC9 /* LoginViewController.swift */,
+				72F142B92BE0F7D600BB7F95 /* MainViewController.swift */,
+				72BE69602BE137180001E5DC /* SettingsViewController.swift */,
+				72BE69622BE137AF0001E5DC /* TabBarViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		72BA290C2BE0D2A400E2363F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */,
+				722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */,
+				722A3DD22BE03505007F0BC4 /* ActionButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72BA290D2BE0D2BC00E2363F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				72BA290E2BE0D2CE00E2363F /* Endpoints.swift */,
+				72BA29102BE0D2F400E2363F /* Constants.swift */,
+				72BA29122BE0D48B00E2363F /* HTTP.swift */,
+				72BA29192BE0DAE900E2363F /* AuthService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		72BA29142BE0D79100E2363F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72BA29152BE0D7A800E2363F /* SignupUserRequest.swift */,
+				72BA29172BE0D96100E2363F /* ServerResponses.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		72FBDE6D2BDD4E8E009EEFC9 = {
 			isa = PBXGroup;
 			children = (
@@ -62,13 +123,11 @@
 		72FBDE782BDD4E8E009EEFC9 /* iosdemo */ = {
 			isa = PBXGroup;
 			children = (
+				72BA29142BE0D79100E2363F /* Models */,
+				72BA290D2BE0D2BC00E2363F /* Network */,
+				72BA290C2BE0D2A400E2363F /* Views */,
+				72BA290B2BE0D28900E2363F /* Controllers */,
 				72FBDE792BDD4E8E009EEFC9 /* AppDelegate.swift */,
-				72FBDE8D2BDD53C9009EEFC9 /* LoginViewController.swift */,
-				72FBDE8F2BDD53D6009EEFC9 /* SignupViewController.swift */,
-				722A3DD22BE03505007F0BC4 /* ActionButton.swift */,
-				722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */,
-				722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */,
-				72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */,
 				72FBDE822BDD4E8F009EEFC9 /* Assets.xcassets */,
 				72FBDE842BDD4E8F009EEFC9 /* LaunchScreen.storyboard */,
 				72FBDE872BDD4E8F009EEFC9 /* Info.plist */,
@@ -146,13 +205,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72BE69632BE137AF0001E5DC /* TabBarViewController.swift in Sources */,
 				72FBDE8E2BDD53C9009EEFC9 /* LoginViewController.swift in Sources */,
 				72FBDE7E2BDD4E8E009EEFC9 /* HomeViewController.swift in Sources */,
 				722A3DD12BE02E91007F0BC4 /* PasswordTextField.swift in Sources */,
 				722A3DCF2BE02732007F0BC4 /* EmailTextField.swift in Sources */,
 				72FBDE902BDD53D6009EEFC9 /* SignupViewController.swift in Sources */,
+				72BA29132BE0D48B00E2363F /* HTTP.swift in Sources */,
+				72BA291A2BE0DAE900E2363F /* AuthService.swift in Sources */,
+				72F142BA2BE0F7D600BB7F95 /* MainViewController.swift in Sources */,
+				72BE69612BE137180001E5DC /* SettingsViewController.swift in Sources */,
 				72FBDE7A2BDD4E8E009EEFC9 /* AppDelegate.swift in Sources */,
+				72BA290F2BE0D2CE00E2363F /* Endpoints.swift in Sources */,
 				722A3DD32BE03505007F0BC4 /* ActionButton.swift in Sources */,
+				72BA29182BE0D96100E2363F /* ServerResponses.swift in Sources */,
+				72BA29112BE0D2F400E2363F /* Constants.swift in Sources */,
+				72BA29162BE0D7A800E2363F /* SignupUserRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

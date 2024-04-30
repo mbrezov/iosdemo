@@ -27,6 +27,7 @@ class SignupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         title="Sign Up"
@@ -36,6 +37,41 @@ class SignupViewController: UIViewController {
         view.addSubview(loginButton)
         
         configureLoginButton()
+    }
+    
+    @objc func didTapConfirm() {
+        let userRequest = SignupUserRequest(
+            email: self.emailTextField.text ?? "",
+            password: self.passwordTextField.text ?? ""
+        )
+        
+        guard let request = Endpoint.signup(userRequest: userRequest).request else { return }
+        
+        AuthService.createAccount(request: request) { result in
+            switch result {
+                case .success(let successResponse):
+                    UserDefaults.standard.set(successResponse.token, forKey: "AuthToken")
+                    let token = UserDefaults.standard.string(forKey: "AuthToken")
+                    print("Email: \(successResponse.email)")
+                    print("Token: \(token ?? "")")
+                    DispatchQueue.main.async {
+                        let vc = TabBarViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                
+                case .failure(let error):
+                    guard let error = error as? ServiceError else { return }
+                
+                    switch error {
+                        case .serverError(let message):
+                            print("Server error: \(message)")
+                        case .unknownError(let message):
+                            print("Unknown error: \(message)")
+                        case .decodingError(let message):
+                        print("Decoding error: \(message)")
+                    }
+            }
+        }
     }
     
     @objc func loginHandler() {
@@ -77,6 +113,8 @@ class SignupViewController: UIViewController {
             confirmButton.widthAnchor.constraint(equalToConstant: 200),
             confirmButton.heightAnchor.constraint(equalToConstant: 45),   
         ])
+        
+        confirmButton.addTarget(self, action: #selector(didTapConfirm), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             loginLabel.topAnchor.constraint(equalTo: confirmButton.bottomAnchor, constant: 20),

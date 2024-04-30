@@ -13,7 +13,14 @@ class LoginViewController: UIViewController {
     private lazy var emailTextField = EmailTextField()
     private lazy var passwordTextField = PasswordTextField(placeholder: "Password")
     private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Login")
-    private lazy var loginLabel = UILabel()
+    private lazy var loginLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Already have an account?"
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
     private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
 
     override func viewDidLoad() {
@@ -27,6 +34,41 @@ class LoginViewController: UIViewController {
         view.addSubview(signupButton)
         
         configureLoginButton()
+    }
+    
+    @objc func didTapConfirm() {
+        let userRequest = LoginUserRequest(
+            email: self.emailTextField.text ?? "",
+            password: self.passwordTextField.text ?? ""
+        )
+        
+        guard let request = Endpoint.login(userRequest: userRequest).request else { return }
+        
+        AuthService.createAccount(request: request) { result in
+            switch result {
+                case .success(let successResponse):
+                    UserDefaults.standard.set(successResponse.token, forKey: "AuthToken")
+                    let token = UserDefaults.standard.string(forKey: "AuthToken")
+                    print("Email: \(successResponse.email)")
+                    print("Token: \(token ?? "")")
+                    DispatchQueue.main.async {
+                        let vc = TabBarViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                
+                case .failure(let error):
+                    guard let error = error as? ServiceError else { return }
+                
+                    switch error {
+                        case .serverError(let message):
+                            print("Server error: \(message)")
+                        case .unknownError(let message):
+                            print("Unknown error: \(message)")
+                        case .decodingError(let message):
+                            print("Decoding error: \(message)")
+                    }
+            }
+        }
     }
     
     @objc func signupHandler() {
@@ -68,10 +110,7 @@ class LoginViewController: UIViewController {
             loginLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
         
-        loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginLabel.text = "Don't have an account yet?"
-        loginLabel.textColor = .black
-        loginLabel.textAlignment = .center
+        confirmButton.addTarget(self, action: #selector(didTapConfirm), for: .touchUpInside)
     }
 
     func configureLoginButton() {
