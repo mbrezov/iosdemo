@@ -11,12 +11,19 @@ import UIKit
 
 class SignupViewController: UIViewController {
     
-    let emailTextField = EmailTextField()
-    let passwordTextField = PasswordTextField(placeholder: "Password")
-    let confirmPasswordTextField = PasswordTextField(placeholder: "Confirm password")
-    let confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Confirm Sign Up")
-    let loginLabel = UILabel()
-    let loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
+    private lazy var emailTextField = EmailTextField()
+    private lazy var passwordTextField = PasswordTextField(placeholder: "Password")
+    private lazy var confirmPasswordTextField = PasswordTextField(placeholder: "Confirm password")
+    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Confirm Sign Up")
+    private lazy var loginLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Already have an account?"
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,11 +84,6 @@ class SignupViewController: UIViewController {
             loginLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             loginLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
-        
-        loginLabel.translatesAutoresizingMaskIntoConstraints = false
-        loginLabel.text = "Already have an account?"
-        loginLabel.textColor = .black
-        loginLabel.textAlignment = .center 
     }
     
     func configureLoginButton() {

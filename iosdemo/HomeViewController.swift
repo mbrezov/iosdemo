@@ -9,8 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
-    let loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
+    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
+    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             
             signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signupButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            signupButton.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -30),
             signupButton.widthAnchor.constraint(equalToConstant: 250),
             signupButton.heightAnchor.constraint(equalToConstant: 50),
         ])

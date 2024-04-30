@@ -10,11 +10,11 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    let emailTextField = EmailTextField()
-    let passwordTextField = PasswordTextField(placeholder: "Password")
-    let confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Login")
-    let loginLabel = UILabel()
-    let signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
+    private lazy var emailTextField = EmailTextField()
+    private lazy var passwordTextField = PasswordTextField(placeholder: "Password")
+    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Login")
+    private lazy var loginLabel = UILabel()
+    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
 
     override func viewDidLoad() {
         super.viewDidLoad()
