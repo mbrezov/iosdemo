@@ -21,15 +21,25 @@ class LoginViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+    private lazy var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .red
+        label.textAlignment = .center
+        return label
+    }()
     private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.errorLabel.isHidden = true
         
         title="Login"
         
         configureTextFields()
+        
+        configureErrorLabel()
 
         view.addSubview(signupButton)
         
@@ -48,25 +58,33 @@ class LoginViewController: UIViewController {
             switch result {
                 case .success(let successResponse):
                     UserDefaults.standard.set(successResponse.token, forKey: "AuthToken")
-                    let token = UserDefaults.standard.string(forKey: "AuthToken")
                     print("Email: \(successResponse.email)")
-                    print("Token: \(token ?? "")")
+                    print("Token: \(successResponse.token)")
                     DispatchQueue.main.async {
                         let vc = TabBarViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                            let window = windowScene.windows.first {
+                                window.rootViewController = vc
+                                window.makeKeyAndVisible()
+                            }
                     }
                 
                 case .failure(let error):
+                DispatchQueue.main.async {
                     guard let error = error as? ServiceError else { return }
                 
                     switch error {
                         case .serverError(let message):
-                            print("Server error: \(message)")
+                            self.errorLabel.text = "\(message)"
+                            self.errorLabel.isHidden = false
                         case .unknownError(let message):
-                            print("Unknown error: \(message)")
+                            self.errorLabel.text = "\(message)"
+                            self.errorLabel.isHidden = false
                         case .decodingError(let message):
                             print("Decoding error: \(message)")
                     }
+                }
             }
         }
     }
@@ -97,7 +115,7 @@ class LoginViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            confirmButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            confirmButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 35),
             confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmButton.widthAnchor.constraint(equalToConstant: 200),
             confirmButton.heightAnchor.constraint(equalToConstant: 45),
@@ -124,5 +142,16 @@ class LoginViewController: UIViewController {
         ])
         
         signupButton.addTarget(self, action: #selector(signupHandler), for: .touchUpInside) //addTarget has to be implemented into ActionButton, so the selector can be passed
+    }
+    
+    func configureErrorLabel() {
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 5),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            errorLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
 }

@@ -9,8 +9,8 @@ import Foundation
 
 enum Endpoint {
     //path
-    case signup(path: String = "/api/user/signup", userRequest: SignupUserRequest)
-    case login(path: String = "/api/user/login", userRequest: LoginUserRequest)
+    case signup(path: String = "/user/signup", userRequest: SignupUserRequest)
+    case login(path: String = "/user/login", userRequest: LoginUserRequest)
     
     //makign a request
     var request: URLRequest? {

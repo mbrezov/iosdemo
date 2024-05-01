@@ -10,7 +10,7 @@ import Foundation
 struct SignupUserRequest: Codable {
     let email: String
     let password: String
-    //let confirmPassword: String -> password checking will be implemented on the server side
+    let confirmPassword: String
 }
 
 struct LoginUserRequest: Codable {

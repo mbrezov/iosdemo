@@ -12,11 +12,9 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     private lazy var logoutButton = ActionButton(backgroundColor: .systemIndigo, title: "Logout")
-    private lazy var tabBar = UITabBarController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
         view.backgroundColor = .white
         
         configureButton()

@@ -8,8 +8,8 @@
 import Foundation
 
 struct Constants {
-    static let scheme = "http"
-    static let baseURL = "localhost"
-    static let port: Int? = 4000
-    static let fullURL = "http://localhost:4000"
+    static let scheme: String = "http"
+    static let baseURL: String = "localhost"
+    static let port: Int = 4000
+    static let fullURL = ("\(scheme)://\(baseURL):" + "\(port)")
 }
