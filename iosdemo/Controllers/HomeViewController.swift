@@ -9,8 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
-    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
+    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up", action: signupHandler)
+    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login", action: loginHandler)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,6 @@ class HomeViewController: UIViewController {
             signupButton.widthAnchor.constraint(equalToConstant: 250),
             signupButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-        
-        loginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside) //addTarget has to be implemented into ActionButton, so the selector can be passed
-        signupButton.addTarget(self, action: #selector(signupHandler), for: .touchUpInside)
     }
     
     @objc func signupHandler() {

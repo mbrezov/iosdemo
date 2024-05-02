@@ -11,7 +11,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    private lazy var logoutButton = ActionButton(backgroundColor: .systemIndigo, title: "Logout")
+    private lazy var logoutButton = ActionButton(backgroundColor: .systemIndigo, title: "Logout", action: logoutHandler)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,6 @@ class SettingsViewController: UIViewController {
             logoutButton.widthAnchor.constraint(equalToConstant: 250),
             logoutButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-    
-        logoutButton.addTarget(self, action: #selector(logoutHandler), for: .touchUpInside)
     }
     
 

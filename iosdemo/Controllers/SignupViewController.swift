@@ -14,7 +14,7 @@ class SignupViewController: UIViewController {
     private lazy var emailTextField = EmailTextField()
     private lazy var passwordTextField = PasswordTextField(placeholder: "Password")
     private lazy var confirmPasswordTextField = PasswordTextField(placeholder: "Confirm password")
-    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Confirm Sign Up")
+    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 0.8, green: 0.82, blue: 0.89, alpha: 1.0), title: "Confirm Sign Up", action: confirmSignup)
     private lazy var loginLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -25,18 +25,18 @@ class SignupViewController: UIViewController {
     }()
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .red
         label.textAlignment = .center
         return label
     }()
-    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login")
+    private lazy var loginButton = ActionButton(backgroundColor: .systemIndigo, title: "Login", action: loginHandler)
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.errorLabel.isHidden = true
         
         title="Sign Up"
         
@@ -44,12 +44,14 @@ class SignupViewController: UIViewController {
         
         configureErrorLabel()
         
-        view.addSubview(loginButton)
+        configureConfirmButton()
+        
+        configureLoginLabel()
         
         configureLoginButton()
     }
     
-    @objc func didTapConfirm() {
+    @objc func confirmSignup() {
         let userRequest = SignupUserRequest(
             email: self.emailTextField.text ?? "",
             password: self.passwordTextField.text ?? "",
@@ -70,7 +72,6 @@ class SignupViewController: UIViewController {
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                             let window = windowScene.windows.first {
                                 window.rootViewController = vc
-                                window.makeKeyAndVisible()
                             }
                     }
                 
@@ -102,8 +103,6 @@ class SignupViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(confirmPasswordTextField)
-        view.addSubview(confirmButton)
-        view.addSubview(loginLabel)
 
         NSLayoutConstraint.activate([
             emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
@@ -125,15 +124,32 @@ class SignupViewController: UIViewController {
             confirmPasswordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    func configureErrorLabel() {
+        view.addSubview(errorLabel)
+        
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 5),
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            errorLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+    
+    func configureConfirmButton() {
+        view.addSubview(confirmButton)
         
         NSLayoutConstraint.activate([
             confirmButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 35),
             confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmButton.widthAnchor.constraint(equalToConstant: 200),
-            confirmButton.heightAnchor.constraint(equalToConstant: 45),   
+            confirmButton.heightAnchor.constraint(equalToConstant: 45),
         ])
-        
-        confirmButton.addTarget(self, action: #selector(didTapConfirm), for: .touchUpInside)
+    }
+    
+    func configureLoginLabel() {
+        view.addSubview(loginLabel)
         
         NSLayoutConstraint.activate([
             loginLabel.topAnchor.constraint(equalTo: confirmButton.bottomAnchor, constant: 20),
@@ -151,19 +167,6 @@ class SignupViewController: UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             loginButton.widthAnchor.constraint(equalToConstant: 250),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
-        
-        loginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside) //addTarget has to be implemented into ActionButton, so the selector can be passed
-    }
-    
-    func configureErrorLabel() {
-        view.addSubview(errorLabel)
-        
-        NSLayoutConstraint.activate([
-            errorLabel.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 5),
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            errorLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }

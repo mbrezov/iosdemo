@@ -8,6 +8,8 @@
 import UIKit
 
 class ActionButton: UIButton {
+    
+    var selectorHandler: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,12 +20,15 @@ class ActionButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(backgroundColor: UIColor, title: String) {
+    init(backgroundColor: UIColor, title: String, action: (() -> Void)? = nil) {
         super.init(frame: .zero)
   
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
+        self.selectorHandler = action
         configure()
+        
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     private func configure() {
@@ -31,5 +36,9 @@ class ActionButton: UIButton {
         layer.cornerRadius = 12
         titleLabel?.textColor = .white
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+    }
+    
+    @objc private func buttonTapped() {
+        selectorHandler?()
     }
 }

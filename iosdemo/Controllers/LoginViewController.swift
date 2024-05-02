@@ -12,41 +12,43 @@ class LoginViewController: UIViewController {
 
     private lazy var emailTextField = EmailTextField()
     private lazy var passwordTextField = PasswordTextField(placeholder: "Password")
-    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 205/255, green: 209/255, blue: 228/255, alpha: 1.0), title: "Login")
-    private lazy var loginLabel: UILabel = {
+    private lazy var confirmButton = ActionButton(backgroundColor: UIColor(red: 0.8, green: 0.82, blue: 0.89, alpha: 1.0), title: "Login", action: confirmLogin)
+    private lazy var signupLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Already have an account?"
+        label.text = "Don't have an account?"
         label.textColor = .black
         label.textAlignment = .center
         return label
     }()
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .red
         label.textAlignment = .center
         return label
     }()
-    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up")
+    private lazy var signupButton = ActionButton(backgroundColor: .systemIndigo, title: "Sign Up", action: signupHandler)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.errorLabel.isHidden = true
         
         title="Login"
         
         configureTextFields()
         
         configureErrorLabel()
-
-        view.addSubview(signupButton)
         
-        configureLoginButton()
+        configureConfirmButton()
+
+        configureSignupLabel()
+        
+        configureSignupButton()
     }
     
-    @objc func didTapConfirm() {
+    @objc func confirmLogin() {
         let userRequest = LoginUserRequest(
             email: self.emailTextField.text ?? "",
             password: self.passwordTextField.text ?? ""
@@ -66,7 +68,6 @@ class LoginViewController: UIViewController {
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                             let window = windowScene.windows.first {
                                 window.rootViewController = vc
-                                window.makeKeyAndVisible()
                             }
                     }
                 
@@ -97,8 +98,6 @@ class LoginViewController: UIViewController {
     func configureTextFields() {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
-        view.addSubview(confirmButton)
-        view.addSubview(loginLabel)
 
         NSLayoutConstraint.activate([
             emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
@@ -113,6 +112,10 @@ class LoginViewController: UIViewController {
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    func configureConfirmButton() {
+        view.addSubview(confirmButton)
         
         NSLayoutConstraint.activate([
             confirmButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 35),
@@ -120,28 +123,6 @@ class LoginViewController: UIViewController {
             confirmButton.widthAnchor.constraint(equalToConstant: 200),
             confirmButton.heightAnchor.constraint(equalToConstant: 45),
         ])
-        
-        NSLayoutConstraint.activate([
-            loginLabel.topAnchor.constraint(equalTo: confirmButton.bottomAnchor, constant: 20),
-            loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            loginLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            loginLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        confirmButton.addTarget(self, action: #selector(didTapConfirm), for: .touchUpInside)
-    }
-
-    func configureLoginButton() {
-        view.addSubview(signupButton)
-        
-        NSLayoutConstraint.activate([
-            signupButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 20),
-            signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signupButton.widthAnchor.constraint(equalToConstant: 250),
-            signupButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
-        
-        signupButton.addTarget(self, action: #selector(signupHandler), for: .touchUpInside) //addTarget has to be implemented into ActionButton, so the selector can be passed
     }
     
     func configureErrorLabel() {
@@ -152,6 +133,28 @@ class LoginViewController: UIViewController {
             errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             errorLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+    
+    func configureSignupLabel() {
+        view.addSubview(signupLabel)
+        
+        NSLayoutConstraint.activate([
+            signupLabel.topAnchor.constraint(equalTo: confirmButton.bottomAnchor, constant: 20),
+            signupLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            signupLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            signupLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
+    func configureSignupButton() {
+        view.addSubview(signupButton)
+        
+        NSLayoutConstraint.activate([
+            signupButton.topAnchor.constraint(equalTo: signupLabel.bottomAnchor, constant: 20),
+            signupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signupButton.widthAnchor.constraint(equalToConstant: 250),
+            signupButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }
