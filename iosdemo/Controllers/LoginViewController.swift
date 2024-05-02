@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         
         guard let request = Endpoint.login(userRequest: userRequest).request else { return }
         
-        AuthService.createAccount(request: request) { result in
+        AuthService.getAccount(request: request) { result in
             switch result {
                 case .success(let successResponse):
                     UserDefaults.standard.set(successResponse.token, forKey: "AuthToken")

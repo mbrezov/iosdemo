@@ -15,8 +15,8 @@ enum ServiceError: Error {
 
 class AuthService {
     
-    static func createAccount(request: URLRequest, completion: @escaping
-                              (Result<SucessResponse, Error>) -> Void) {
+    private static func authRequest(request: URLRequest, completion: @escaping
+                                    (Result<SucessResponse, Error>) -> Void) {
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 
@@ -45,4 +45,13 @@ class AuthService {
             }
         }.resume()
     }
+    
+    static func createAccount(request: URLRequest, completion: @escaping (Result<SucessResponse, Error>) -> Void) {
+        authRequest(request: request, completion: completion)
+    }
+    
+    static func getAccount(request: URLRequest, completion: @escaping (Result<SucessResponse, Error>) -> Void) {
+        authRequest(request: request, completion: completion)
+    }
+    
 }
