@@ -19,13 +19,13 @@ class TabBarViewController: UITabBarController {
     }
     
     private func configureTabBar() {
-        let vc1 = MainViewController()
+        let vc1 = NewsViewController()
         let vc2 = SettingsViewController()
         
-        vc1.tabBarItem.image = UIImage(systemName: "house")
+        vc1.tabBarItem.image = UIImage(systemName: "newspaper")
         vc2.tabBarItem.image = UIImage(systemName: "gearshape")
         
-        vc1.tabBarItem.title = "Home"
+        vc1.tabBarItem.title = "News"
         vc2.tabBarItem.title = "Settings"
         
         let nav1 = UINavigationController(rootViewController: vc1)

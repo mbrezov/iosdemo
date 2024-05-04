@@ -8,6 +8,7 @@
 import Foundation
 
 enum Endpoint {
+    
     //path
     case signup(path: String = "/user/signup", userRequest: SignupUserRequest)
     case login(path: String = "/user/login", userRequest: LoginUserRequest)
