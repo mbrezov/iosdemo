@@ -6,39 +6,40 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsViewCell: UITableViewCell {
-    
-//    private lazy var newsImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.layer.cornerRadius = 10
-//        imageView.clipsToBounds = true
-//        return imageView
-//    }()
+    private lazy var articleImageView: UIImageView = {
+        let articleImageView = UIImageView()
+        articleImageView.translatesAutoresizingMaskIntoConstraints = false
+        articleImageView.layer.cornerRadius = 10
+        articleImageView.clipsToBounds = true
+        return articleImageView
+    }()
     private lazy var newsTitleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.numberOfLines = 0
-        titleLabel.backgroundColor = .blue
-        titleLabel.adjustsFontSizeToFitWidth = true
-        return titleLabel
+        let newsTitleLabel = UILabel()
+        newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        newsTitleLabel.numberOfLines = 0
+        newsTitleLabel.textColor = .white
+        newsTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        newsTitleLabel.adjustsFontForContentSizeCategory = true
+        newsTitleLabel.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        newsTitleLabel.layer.cornerRadius = 5
+        newsTitleLabel.clipsToBounds = true
+        return newsTitleLabel
     }()
     private lazy var newsDescriptionLabel: UILabel = {
-        let descriptionLabel = UILabel()
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.backgroundColor = .red
-        descriptionLabel.adjustsFontSizeToFitWidth = true
-        return descriptionLabel
+        let newsDescriptionLabel = UILabel()
+        newsDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        newsDescriptionLabel.numberOfLines = 0
+        newsDescriptionLabel.adjustsFontForContentSizeCategory = true
+        return newsDescriptionLabel
 
     }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .green
         
-//        configureImageView()
+        configImageVIew()
         
         configureTitleLabel()
         
@@ -49,29 +50,45 @@ class NewsViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(article: Article) {
-        newsTitleLabel.text = article.title
-        newsDescriptionLabel.text = article.description
+    private func setDescription(_ description: String?) {
+        if let description {
+            if description.count <= 200 {
+                newsDescriptionLabel.text = description
+            } else {
+                let shortDescription = String(description.prefix(200))
+                newsDescriptionLabel.text = shortDescription + "..."
+            }
+        }
     }
     
-//    func configureImageView() {
-//        contentView.addSubview(newsImageView)
-//        
-//        NSLayoutConstraint.activate([
-//            newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8), // Adjust top spacing as needed
-//            newsImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8), // Adjust leading spacing as needed
-//            newsImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8), // Adjust trailing spacing as needed
-//            newsImageView.heightAnchor.constraint(equalToConstant: 100) // Adjust image height as needed
-//        ])
-//    }
+    func set(article: Article) {
+        
+        newsTitleLabel.text = article.title
+        
+        setDescription(article.description)
+    
+        let url = URL(string: article.urlToImage ?? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png")
+        articleImageView.kf.setImage(with: url)
+    }
+    
+    func configImageVIew() {
+        contentView.addSubview(articleImageView)
+        
+        NSLayoutConstraint.activate([
+            articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            articleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            articleImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            articleImageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+    }
 
     func configureTitleLabel() {
         contentView.addSubview(newsTitleLabel)
-        
+
         NSLayoutConstraint.activate([
-            newsTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8), // Adjust top spacing as needed
-            newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8), // Adjust leading spacing as needed
-            newsTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8) // Adjust trailing spacing as needed
+            newsTitleLabel.leadingAnchor.constraint(equalTo: articleImageView.leadingAnchor, constant: 8),
+            newsTitleLabel.trailingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: -8),
+            newsTitleLabel.bottomAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: -5)
         ])
     }
 
@@ -79,10 +96,10 @@ class NewsViewCell: UITableViewCell {
         contentView.addSubview(newsDescriptionLabel)
         
         NSLayoutConstraint.activate([
-            newsDescriptionLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 8), // Adjust top spacing as needed
-            newsDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8), // Adjust leading spacing as needed
-            newsDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8), // Adjust trailing spacing as needed
-            newsDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8) // Adjust bottom spacing as needed
-        ])
+             newsDescriptionLabel.topAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: 5),
+             newsDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+             newsDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+             newsDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+         ])
     }
 }

@@ -15,7 +15,7 @@ class NewsViewController: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "NewsViewCell")
-        tableView.rowHeight = 200
+        tableView.rowHeight = 300
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -28,9 +28,9 @@ class NewsViewController: UIViewController {
         
         title = "News"
         
-        getNewsData(from: Constants.newsApiUrl)
-
         configureTableView()
+        
+        getNewsData(from: Constants.newsApiUrl)
     }
     
     private func getNewsData(from url: String) {
@@ -61,21 +61,23 @@ class NewsViewController: UIViewController {
         }).resume()
     }
     
-    func configureTableView(){
+    func configureTableView() {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
         tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10)
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
 }
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        return min(articles.count, 20)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,5 +86,13 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.set(article: article)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedArticle = articles[indexPath.row]
+        let articleViewController = ArticleViewController()
+        
+        articleViewController.article = selectedArticle
+        navigationController?.pushViewController(articleViewController, animated: true)
     }
 }
