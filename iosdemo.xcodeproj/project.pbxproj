@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7209F3292BE962CF003D0622 /* NewsApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209F3282BE962CF003D0622 /* NewsApiService.swift */; };
 		722A3DCF2BE02732007F0BC4 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */; };
 		722A3DD12BE02E91007F0BC4 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */; };
 		722A3DD32BE03505007F0BC4 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722A3DD22BE03505007F0BC4 /* ActionButton.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7209F3282BE962CF003D0622 /* NewsApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApiService.swift; sourceTree = "<group>"; };
 		722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
 		722A3DD02BE02E91007F0BC4 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		722A3DD22BE03505007F0BC4 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				72BA29102BE0D2F400E2363F /* Constants.swift */,
 				72BA29122BE0D48B00E2363F /* HTTP.swift */,
 				72BA29192BE0DAE900E2363F /* AuthService.swift */,
+				7209F3282BE962CF003D0622 /* NewsApiService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				72BA291A2BE0DAE900E2363F /* AuthService.swift in Sources */,
 				72F142BA2BE0F7D600BB7F95 /* NewsViewController.swift in Sources */,
 				72BE69612BE137180001E5DC /* SettingsViewController.swift in Sources */,
+				7209F3292BE962CF003D0622 /* NewsApiService.swift in Sources */,
 				72FBDE7A2BDD4E8E009EEFC9 /* AppDelegate.swift in Sources */,
 				723CF0AD2BE6372600401295 /* NewsApiResponses.swift in Sources */,
 				72BA290F2BE0D2CE00E2363F /* Endpoints.swift in Sources */,

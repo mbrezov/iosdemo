@@ -34,31 +34,18 @@ class NewsViewController: UIViewController {
     }
     
     private func getNewsData(from url: String) {
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-                print("something went wrong")
-                return
+        let newsApiService = NewsApiService()
+        newsApiService.getNewsData(from: url) { result in
+            switch result {
+            case .success(let response):
+                self.articles = response.articles
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
             }
-    
-            var result: NewsApiResponse?
-            
-            do {
-                result = try JSONDecoder().decode(NewsApiResponse.self, from: data)
-            } catch {
-                print("failed to convert \(error.localizedDescription)")
-            }
-            
-            guard let json = result else {
-                return
-            }
-            
-            self.articles = json.articles
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }).resume()
+        }
     }
     
     func configureTableView() {

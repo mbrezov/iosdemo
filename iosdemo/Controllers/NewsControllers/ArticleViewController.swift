@@ -55,7 +55,7 @@ class ArticleViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
         
         let articleView = UIStackView(arrangedSubviews: [articleImageView, articleTitleLabel, articleContentLabel])
