@@ -1,14 +1,13 @@
 //
-//  NewsViewCell.swift
+//  MoreNewsCollectionViewCell.swift
 //  iosdemo
 //
-//  Created by Mario Brezovečki on 04.05.2024..
+//  Created by Mario Brezovečki on 06.05.2024..
 //
 
 import UIKit
-import Kingfisher
 
-class NewsViewCell: UITableViewCell {
+class MoreNewsCollectionViewCell: UICollectionViewCell {
     private lazy var articleImageView: UIImageView = {
         let articleImageView = UIImageView()
         articleImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,11 +18,10 @@ class NewsViewCell: UITableViewCell {
     private lazy var newsTitleLabel: UILabel = {
         let newsTitleLabel = UILabel()
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        newsTitleLabel.numberOfLines = 0
-        newsTitleLabel.textColor = .white
+        newsTitleLabel.numberOfLines = 2
+        newsTitleLabel.textColor = .systemIndigo
         newsTitleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         newsTitleLabel.adjustsFontForContentSizeCategory = true
-        newsTitleLabel.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         newsTitleLabel.layer.cornerRadius = 5
         newsTitleLabel.clipsToBounds = true
         return newsTitleLabel
@@ -36,13 +34,13 @@ class NewsViewCell: UITableViewCell {
         return newsDescriptionLabel
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor(red: 0.85, green: 0.87, blue: 1, alpha: 0.5)
+        self.layer.cornerRadius = 10
         
         configurImageView()
-        
         configureTitleLabel()
-        
         configureDescriptionLabel()
     }
     
@@ -53,7 +51,7 @@ class NewsViewCell: UITableViewCell {
     func set(article: Article) {
         
         newsTitleLabel.text = article.title
-        
+
         newsDescriptionLabel.text = article.description
     
         let url = URL(string: article.urlToImage ?? "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png")
@@ -67,7 +65,7 @@ class NewsViewCell: UITableViewCell {
             articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             articleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             articleImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            articleImageView.heightAnchor.constraint(equalToConstant: 200)
+            articleImageView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
 
@@ -75,9 +73,9 @@ class NewsViewCell: UITableViewCell {
         contentView.addSubview(newsTitleLabel)
 
         NSLayoutConstraint.activate([
-            newsTitleLabel.leadingAnchor.constraint(equalTo: articleImageView.leadingAnchor, constant: 8),
-            newsTitleLabel.trailingAnchor.constraint(equalTo: articleImageView.trailingAnchor, constant: -8),
-            newsTitleLabel.bottomAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: -5)
+            newsTitleLabel.topAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: 5),
+            newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            newsTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
         ])
     }
 
@@ -85,7 +83,7 @@ class NewsViewCell: UITableViewCell {
         contentView.addSubview(newsDescriptionLabel)
         
         NSLayoutConstraint.activate([
-            newsDescriptionLabel.topAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: 5),
+            newsDescriptionLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 5),
             newsDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             newsDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             newsDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)

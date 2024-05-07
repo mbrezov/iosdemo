@@ -10,17 +10,16 @@ import UIKit
 
 
 class NewsViewController: UIViewController {
+    private var articles: [Article] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(NewsViewCell.self, forCellReuseIdentifier: "NewsViewCell")
-        tableView.rowHeight = 300
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
     }()
-    private var articles: [Article] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +51,10 @@ class NewsViewController: UIViewController {
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-        tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
 }
@@ -77,9 +76,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedArticle = articles[indexPath.row]
-        let articleViewController = ArticleViewController()
-        
-        articleViewController.article = selectedArticle
+        let articleViewController = ArticleViewController(article: selectedArticle)
+       
         navigationController?.pushViewController(articleViewController, animated: true)
     }
 }

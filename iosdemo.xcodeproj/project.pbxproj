@@ -24,6 +24,8 @@
 		72BE69612BE137180001E5DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE69602BE137180001E5DC /* SettingsViewController.swift */; };
 		72BE69632BE137AF0001E5DC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE69622BE137AF0001E5DC /* TabBarViewController.swift */; };
 		72F142BA2BE0F7D600BB7F95 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F142B92BE0F7D600BB7F95 /* NewsViewController.swift */; };
+		72FACD282BE9757F00FA72D6 /* MoreNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FACD272BE9757F00FA72D6 /* MoreNewsViewController.swift */; };
+		72FACD2A2BE97B8500FA72D6 /* MoreNewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FACD292BE97B8500FA72D6 /* MoreNewsCollectionViewCell.swift */; };
 		72FBDE7A2BDD4E8E009EEFC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBDE792BDD4E8E009EEFC9 /* AppDelegate.swift */; };
 		72FBDE7E2BDD4E8E009EEFC9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */; };
 		72FBDE832BDD4E8F009EEFC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FBDE822BDD4E8F009EEFC9 /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 		72BE69602BE137180001E5DC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		72BE69622BE137AF0001E5DC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		72F142B92BE0F7D600BB7F95 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		72FACD272BE9757F00FA72D6 /* MoreNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreNewsViewController.swift; sourceTree = "<group>"; };
+		72FACD292BE97B8500FA72D6 /* MoreNewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreNewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		72FBDE762BDD4E8E009EEFC9 /* iosdemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosdemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FBDE792BDD4E8E009EEFC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72FBDE7D2BDD4E8E009EEFC9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			children = (
 				72F142B92BE0F7D600BB7F95 /* NewsViewController.swift */,
 				7256E0972BE7ED65001EEBDF /* ArticleViewController.swift */,
+				72FACD272BE9757F00FA72D6 /* MoreNewsViewController.swift */,
 			);
 			path = NewsControllers;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 				722A3DCE2BE02732007F0BC4 /* EmailTextField.swift */,
 				722A3DD22BE03505007F0BC4 /* ActionButton.swift */,
 				723CF0AA2BE62EAA00401295 /* NewsViewCell.swift */,
+				72FACD292BE97B8500FA72D6 /* MoreNewsCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,12 +251,14 @@
 				72FBDE8E2BDD53C9009EEFC9 /* LoginViewController.swift in Sources */,
 				723CF0AB2BE62EAA00401295 /* NewsViewCell.swift in Sources */,
 				72FBDE7E2BDD4E8E009EEFC9 /* HomeViewController.swift in Sources */,
+				72FACD2A2BE97B8500FA72D6 /* MoreNewsCollectionViewCell.swift in Sources */,
 				722A3DD12BE02E91007F0BC4 /* PasswordTextField.swift in Sources */,
 				722A3DCF2BE02732007F0BC4 /* EmailTextField.swift in Sources */,
 				72FBDE902BDD53D6009EEFC9 /* SignupViewController.swift in Sources */,
 				72BA29132BE0D48B00E2363F /* HTTP.swift in Sources */,
 				72BA291A2BE0DAE900E2363F /* AuthService.swift in Sources */,
 				72F142BA2BE0F7D600BB7F95 /* NewsViewController.swift in Sources */,
+				72FACD282BE9757F00FA72D6 /* MoreNewsViewController.swift in Sources */,
 				72BE69612BE137180001E5DC /* SettingsViewController.swift in Sources */,
 				7209F3292BE962CF003D0622 /* NewsApiService.swift in Sources */,
 				72FBDE7A2BDD4E8E009EEFC9 /* AppDelegate.swift in Sources */,
