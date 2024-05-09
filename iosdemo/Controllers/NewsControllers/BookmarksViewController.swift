@@ -32,7 +32,6 @@ class BookmarksViewController: UIViewController {
         getBookmark()
     }
     
-    //placeholder function for updating bookmarksView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getBookmark()

@@ -69,6 +69,11 @@ class ArticleViewController: UIViewController {
         updateBookmarkButtonImage()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateBookmarkButtonImage()
+    }
+    
     private func isBookmarked() -> Bool {
         guard let article = article else {
             return false
