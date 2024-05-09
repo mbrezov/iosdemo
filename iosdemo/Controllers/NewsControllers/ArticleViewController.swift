@@ -66,7 +66,6 @@ class ArticleViewController: UIViewController {
         view.backgroundColor = .white
         
         configureScrollView()
-        updateBookmarkButtonImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,12 +78,7 @@ class ArticleViewController: UIViewController {
             return false
         }
 
-        if let data = UserDefaults.standard.data(forKey: "bookmarks") {
-            if let decodedArticles = try? JSONDecoder().decode([Article].self, from: data) {
-                return decodedArticles.contains(where: { $0.title == article.title })
-            }
-        }
-        return false
+        return BookmarkManager.shared.articleIsBookmarked(article)
     }
     
     private func updateBookmarkButtonImage() {
@@ -96,7 +90,7 @@ class ArticleViewController: UIViewController {
         bookmarkButton.action = selector
     }
     
-    @objc private func addBookmark(){
+    @objc private func addBookmark() {
         guard let article = article else {
             return
         }

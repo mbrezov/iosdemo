@@ -28,8 +28,6 @@ class BookmarksViewController: UIViewController {
         title = "Bookmarks"
  
         configureTableView()
-        
-        getBookmark()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +42,6 @@ class BookmarksViewController: UIViewController {
     
     func configureTableView() {
         view.addSubview(tableView)
-        tableView.delegate = self
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
@@ -53,7 +50,6 @@ class BookmarksViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
-    
 }
 
 extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
