@@ -1,14 +1,15 @@
 //
-//  MainViewController.swift
+//  BookmarksViewController.swift
 //  iosdemo
 //
-//  Created by Mario Brezovečki on 30.04.2024..
+//  Created by Mario Brezovečki on 08.05.2024..
 //
 
 import Foundation
 import UIKit
 
-class NewsViewController: UIViewController {
+class BookmarksViewController: UIViewController {
+    
     private var articles: [Article] = []
     
     private lazy var tableView: UITableView = {
@@ -19,35 +20,32 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        title = "News"
-        
+        title = "Bookmarks"
+ 
         configureTableView()
         
-        getNewsData(from: Constants.newsApiUrl)
+        getBookmark()
     }
     
-    private func getNewsData(from url: String) {
-        let newsApiService = NewsApiService()
-        newsApiService.getNewsData(from: url) { result in
-            switch result {
-            case .success(let response):
-                self.articles = response.articles
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+    //placeholder function for updating bookmarksView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getBookmark()
+    }
+    
+    func getBookmark() {
+        articles = BookmarkManager.shared.getBookmarks()
+        tableView.reloadData()
     }
     
     func configureTableView() {
         view.addSubview(tableView)
+        tableView.delegate = self
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
@@ -56,12 +54,13 @@ class NewsViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
+    
 }
 
-extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
+extension BookmarksViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return min(articles.count, 20)
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -49,12 +49,64 @@ class ArticleViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
+    private lazy var bookmarkButton: UIBarButtonItem = {
+        let bookmarkButton = UIBarButtonItem()
+        navigationItem.rightBarButtonItem = bookmarkButton
+        let bookmarkImage = isBookmarked() ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        let selector = isBookmarked() ? #selector(removeBookmark) : #selector(addBookmark)
+        bookmarkButton.image = bookmarkImage
+        bookmarkButton.target = self
+        bookmarkButton.action = selector
+        return bookmarkButton
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         configureScrollView()
+        updateBookmarkButtonImage()
+    }
+    
+    private func isBookmarked() -> Bool {
+        guard let article = article else {
+            return false
+        }
+
+        if let data = UserDefaults.standard.data(forKey: "bookmarks") {
+            if let decodedArticles = try? JSONDecoder().decode([Article].self, from: data) {
+                return decodedArticles.contains(where: { $0.title == article.title })
+            }
+        }
+        return false
+    }
+    
+    private func updateBookmarkButtonImage() {
+        let bookmarkImage = isBookmarked() ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        bookmarkButton.image = bookmarkImage
+
+        let selector = isBookmarked() ? #selector(removeBookmark) : #selector(addBookmark)
+        bookmarkButton.target = self
+        bookmarkButton.action = selector
+    }
+    
+    @objc private func addBookmark(){
+        guard let article = article else {
+            return
+        }
+        
+        BookmarkManager.shared.addBookmark(article)
+        updateBookmarkButtonImage()
+    }
+    
+    @objc private func removeBookmark() {
+        guard let article = article else {
+            return
+        }
+        
+        BookmarkManager.shared.removeBookmark(article)
+        updateBookmarkButtonImage()
     }
     
     func configureScrollView() {

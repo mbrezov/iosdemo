@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct NewsApiResponse: Decodable {
+struct NewsApiResponse: Codable {
     let status: String
     let totalResults: Int
     let articles: [Article]
 }
 
-struct Article: Decodable {
+struct Article: Codable {
     let title: String
     let description: String?
     let urlToImage: String?

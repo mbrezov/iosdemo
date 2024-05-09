@@ -82,10 +82,9 @@ extension MoreNewsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 240)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        let horizontalPadding: CGFloat = 30
+        let screenWidth = UIScreen.main.bounds.width
+        let width = (screenWidth - horizontalPadding) / 2
+        return CGSize(width: width, height: 240)
     }
 }
