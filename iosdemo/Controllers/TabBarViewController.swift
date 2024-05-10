@@ -19,18 +19,26 @@ class TabBarViewController: UITabBarController {
     }
     
     private func configureTabBar() {
-        let vc1 = MainViewController()
-        let vc2 = SettingsViewController()
+        let vc1 = NewsViewController()
+        let vc2 = MoreNewsViewController()
+        let vc3 = BookmarksViewController()
+        let vc4 = SettingsViewController()
         
-        vc1.tabBarItem.image = UIImage(systemName: "house")
-        vc2.tabBarItem.image = UIImage(systemName: "gearshape")
+        vc1.tabBarItem.image = UIImage(systemName: "newspaper")
+        vc2.tabBarItem.image = UIImage(systemName: "square.split.2x1")
+        vc3.tabBarItem.image = UIImage(systemName: "bookmark")
+        vc4.tabBarItem.image = UIImage(systemName: "gearshape")
         
-        vc1.tabBarItem.title = "Home"
-        vc2.tabBarItem.title = "Settings"
+        vc1.tabBarItem.title = "News"
+        vc2.tabBarItem.title = "More News"
+        vc3.tabBarItem.title = "Bookmarks"
+        vc4.tabBarItem.title = "Settings"
         
         let nav1 = UINavigationController(rootViewController: vc1)
         let nav2 = UINavigationController(rootViewController: vc2)
+        let nav3 = UINavigationController(rootViewController: vc3)
+        let nav4 = UINavigationController(rootViewController: vc4)
         
-        setViewControllers([nav1, nav2], animated: true)
+        setViewControllers([nav1, nav2, nav3, nav4], animated: true)
     }
 }
