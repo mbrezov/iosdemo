@@ -9,6 +9,14 @@ import UIKit
 
 class MoreNewsViewController: UIViewController {
     private var articles: [Article] = []
+    private var filteredArticles: [Article] = []
+    
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search news"
+        return searchController
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -28,6 +36,8 @@ class MoreNewsViewController: UIViewController {
         
         title = "More News"
         
+        configureSearchbar()
+        
         configureCollectionView()
         
         getNewsData(from: Constants.newsApiUrl)
@@ -39,6 +49,7 @@ class MoreNewsViewController: UIViewController {
             switch result {
             case .success(let response):
                 self.articles = response.articles
+                self.filteredArticles = self.articles
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -46,6 +57,12 @@ class MoreNewsViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    func configureSearchbar() {
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func configureCollectionView() {
@@ -63,19 +80,19 @@ class MoreNewsViewController: UIViewController {
 extension MoreNewsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(articles.count, 20)
+        return min(filteredArticles.count, 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:
         IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoreNewsCollectionViewCell", for: indexPath) as! MoreNewsCollectionViewCell
-        let article = self.articles[indexPath.row]
+        let article = self.filteredArticles[indexPath.row]
         cell.set(article: article)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedArticle = articles[indexPath.row]
+        let selectedArticle = filteredArticles[indexPath.row]
         let articleViewController = ArticleViewController(article: selectedArticle)
        
         navigationController?.pushViewController(articleViewController, animated: true)
@@ -95,5 +112,19 @@ extension MoreNewsViewController: UICollectionViewDelegate, UICollectionViewData
         let width = availableWidth / 2
 
         return CGSize(width: width, height: 240)
+    }
+}
+
+extension MoreNewsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text,
+              !query.isEmpty else {
+                self.filteredArticles = self.articles
+                collectionView.reloadData()
+                return
+        }
+        
+        self.filteredArticles = self.articles.filter { $0.title.lowercased().contains(query.lowercased())}
+        collectionView.reloadData()
     }
 }
